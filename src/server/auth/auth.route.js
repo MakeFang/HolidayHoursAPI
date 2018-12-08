@@ -18,6 +18,7 @@ router.route('/logout')
 .get(authController.logoutGet);
 
 router.route('/')
+.get(authController.rootGet)
 .delete(authController.rootDelete);
 
 // router.post('/sign-up', );
