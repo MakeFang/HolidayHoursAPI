@@ -1,6 +1,6 @@
 // const mongoose = require('mongoose');
 const chai = require('chai');
-// const app = require('../../index.js');
+const app = require('../../index.js');
 const chaiHttp = require('chai-http'); // eslint-disable-line import/newline-after-import
 const expect = chai.expect;
 
@@ -25,7 +25,16 @@ describe('Testing Authorized Routes', () => {
 });
 
 describe('Testing Unauthenticated Routes', () => {
-
+  it('Should get json for sign-up', (done) => {
+    chai.request(app)
+        .get('/api/auth/sign-up')
+        .end((err, res) => {
+          if (err) done(err);
+          expect(res).to.have.status(200);
+          expect(res.body.message).to.equal('/api/auth/sign-up username password');
+          done();
+        });
+  });
 });
 
 describe('Testing Unauthorized Routes', () => {

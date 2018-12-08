@@ -1,11 +1,12 @@
 const express = require('express');
+const authController = require('./auth.controller.js');
 
 const router = express.Router(); // eslint-disable-line new-cap
 
 // #TODO: Implement authentication routes.
 
 router.route('/sign-up')
-.get()
+.get(authController.signUpGet)
 .post();
 
 router.route('/login')

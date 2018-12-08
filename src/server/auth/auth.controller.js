@@ -1,9 +1,14 @@
 // #TODO: Implement authentication controller.
 
+// const Auth = require('./auth.model.js');
+
 const authController = {};
 
 authController.signUpGet = (req, res) => {
-  res.send('things work');
+  const result = {
+    message: '/api/auth/sign-up username password'
+  };
+  res.json(result);
 };
 
 authController.signUpPost = (req, res) => {
