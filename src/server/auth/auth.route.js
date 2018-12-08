@@ -7,18 +7,18 @@ const router = express.Router(); // eslint-disable-line new-cap
 
 router.route('/sign-up')
 .get(authController.signUpGet)
-.post();
+.post(authController.signUpPost);
 
 router.route('/login')
-.get()
-.post()
-.put();
+.get(authController.loginGet)
+.post(authController.loginPost)
+.put(authController.loginPut);
 
 router.route('/logout')
-.get();
+.get(authController.logoutGet);
 
 router.route('/')
-.delete();
+.delete(authController.rootDelete);
 
 // router.post('/sign-up', );
 // router.post('/login', );

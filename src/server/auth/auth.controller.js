@@ -1,6 +1,6 @@
 // #TODO: Implement authentication controller.
-
-// const Auth = require('./auth.model.js');
+const jwt = require('jsonwebtoken');
+const Auth = require('./auth.model.js');
 
 const authController = {};
 
@@ -12,7 +12,13 @@ authController.signUpGet = (req, res) => {
 };
 
 authController.signUpPost = (req, res) => {
-  res.send('things work');
+  const auth = new Auth(req.body);
+  auth.save()
+      .then((user) => {
+        const token = jwt.sign({ _id: user._id, username: user.username }, process.env.SECRET, { expiresIn: '60 days' });
+        res.cookie('nToken', token, { maxAge: 900000, httpOnly: true });
+        res.send(`${user.username} you are now signed up`);
+      });
 };
 
 authController.loginGet = (req, res) => {

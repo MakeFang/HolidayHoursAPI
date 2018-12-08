@@ -24,7 +24,7 @@ AuthSchema.pre('save', function (next) {
       return next();
     });
   });
-  return next();
+  return 0;
 });
 
 AuthSchema.methods.comparePassword = function (password, done) {
