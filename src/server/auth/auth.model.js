@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-// const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
 
 // #TODO: Implement thing.model.js.
 
@@ -13,25 +13,25 @@ const AuthSchema = new Schema({
   timestamps: true
 });
 
-// AuthSchema.pre('save', function (next) {
-//   const user = this;
-//   if (!user.isModified('password')) {
-//     return next();
-//   }
-//   bcrypt.genSalt(10, (err, salt) => {
-//     bcrypt.hash(user.password, salt, (error, hash) => {
-//       user.password = hash;
-//       return next();
-//     });
-//   });
-//   return next();
-// });
-//
-// AuthSchema.methods.comparePassword = function (password, done) {
-//   bcrypt.compare(password, this.password, (err, isMatch) => {
-//     done(err, isMatch);
-//   });
-// };
+AuthSchema.pre('save', function (next) {
+  const user = this;
+  if (!user.isModified('password')) {
+    return next();
+  }
+  bcrypt.genSalt(10, (err, salt) => {
+    bcrypt.hash(user.password, salt, (error, hash) => {
+      user.password = hash;
+      return next();
+    });
+  });
+  return next();
+});
+
+AuthSchema.methods.comparePassword = function (password, done) {
+  bcrypt.compare(password, this.password, (err, isMatch) => {
+    done(err, isMatch);
+  });
+};
 
 const Auth = mongoose.model('Auth', AuthSchema);
 module.exports = Auth;
