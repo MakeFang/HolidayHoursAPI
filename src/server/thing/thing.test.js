@@ -22,7 +22,7 @@ describe('## Thing APIs', () => {
     // #TODO: Implement thing.test.js.
   it('should return index of holiday hours', (done) => {
     chai.request(app)
-        .get('/things/')
+        .get('/holiday-hours/')
         .end((err, res) => {
           if (err) done(err);
           expect(res).to.have.status(200);

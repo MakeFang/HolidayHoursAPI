@@ -2,10 +2,10 @@
 
 // const Hour = require('./thing.model.js');
 
-const thingsController = {};
+const hoursController = {};
 
-thingsController.rootget = (req, res) => {
+hoursController.rootget = (req, res) => {
   res.send('things work');
 };
 
-module.exports = thingsController;
+module.exports = hoursController;

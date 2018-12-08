@@ -1,19 +1,16 @@
 const express = require('express');
 
 const router = express.Router(); // eslint-disable-line new-cap
-const thingsController = require('./thing.controller.js');
-
-router.route('/')
-.get(thingsController.rootget);
+const hoursController = require('./thing.controller.js');
 
 // #TODO: Implement thing.route.js.
 
-router.route('/holiday-hours')
+router.route('/')
 .all()
-.get()
+.get(hoursController.rootget)
 .post();
 
-router.route('/holiday-hours/:hoursId')
+router.route('/:hoursId')
 .all()
 .get()
 .put()
