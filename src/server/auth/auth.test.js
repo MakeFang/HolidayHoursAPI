@@ -11,7 +11,6 @@ describe('## Auth APIs', () => {
     expect(3).to.be.not.equal(2);
     done();
   });
-
 });
 
 describe('Testing Authenticated Routes', () => {
