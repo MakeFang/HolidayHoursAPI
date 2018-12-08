@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 const util = require('util');
-const bodyParser = require('body-parser');
+// const bodyParser = require('body-parser');
 
 // config should be imported before importing any other file
 const config = require('./config/config');
 
 const app = require('./config/express');
 const debug = require('debug')('auth-api-starterpack:index');
-const routes = require('./index.route.js');
+// const routes = require('./index.route.js');
 
 mongoose.Promise = Promise;
 
@@ -29,10 +29,10 @@ if (config.mongooseDebug) {
 }
 
 // # TODO: Any additional config changes belong here.
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/', routes);
+// app.use('/', routes);
 
 // module.parent check is required to support mocha watch
 // src: https://github.com/mochajs/mocha/issues/1912
