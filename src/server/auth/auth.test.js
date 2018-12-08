@@ -1,9 +1,12 @@
-const chai = require('chai'); // eslint-disable-line import/newline-after-import
+// const mongoose = require('mongoose');
+const chai = require('chai');
+// const app = require('../../index.js');
+const chaiHttp = require('chai-http'); // eslint-disable-line import/newline-after-import
 const expect = chai.expect;
 
 chai.config.includeStack = true;
 // const chaiHttp = require('chai-http');
-// chai.use(chaiHttp);
+chai.use(chaiHttp);
 
 describe('## Auth APIs', () => {
     // # TODO: Implement Authentication Tests.

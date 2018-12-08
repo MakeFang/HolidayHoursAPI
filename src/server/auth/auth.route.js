@@ -5,19 +5,19 @@ const router = express.Router(); // eslint-disable-line new-cap
 // #TODO: Implement authentication routes.
 
 router.route('/sign-up')
-.all()
 .get()
 .post();
 
 router.route('/login')
-.all()
 .get()
 .post()
 .put();
 
-router.get('/logout');
+router.route('/logout')
+.get();
 
-router.delete('/');
+router.route('/')
+.delete();
 
 // router.post('/sign-up', );
 // router.post('/login', );
