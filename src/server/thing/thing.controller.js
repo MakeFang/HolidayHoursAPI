@@ -31,15 +31,34 @@ hoursController.rootPost = (req, res) => {
 };
 
 hoursController.idGet = (req, res) => {
-  res.send('things work');
+  Hour.findOne({ _id: req.params.hoursId })
+      .populate('name', 'name username')
+      .then((hour) => {
+        res.send(hour);
+      })
+      .catch((err) => {
+        res.send(err.message);
+      });
 };
 
 hoursController.idPut = (req, res) => {
-  res.send('things work');
+  Hour.findByIdAndUpdate(req.params.hoursId, req.body)
+      .then((hour) => {
+        res.send(hour);
+      })
+      .catch((err) => {
+        res.send(err.message);
+      });
 };
 
 hoursController.idDelete = (req, res) => {
-  res.send('things work');
+  Hour.findByIdAndRemove(req.params.hoursId)
+      .then((hour) => {
+        res.send(`${hour} deleted`);
+      })
+      .catch((err) => {
+        res.send(err.message);
+      });
 };
 
 module.exports = hoursController;
