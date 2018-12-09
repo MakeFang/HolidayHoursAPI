@@ -55,7 +55,29 @@ authController.loginPost = (req, res) => {
 };
 
 authController.loginPut = (req, res) => {
-  res.send('things work');
+  const username = req.body.username;
+  const password = req.body.password;
+  if (!res.locals.currentUser) {
+    res.send('You must be logged in');
+  }
+  if (username === res.locals.currentUser.username) {
+    Auth.findOne({ username })
+        .then((auth) => {
+          auth.password = password;
+          const newAuth = new Auth(auth);
+          newAuth.save()
+                 .then((user) => {
+                   const token = jwt.sign({ _id: user._id, username: user.username }, process.env.JWT_SECRET, { expiresIn: '60 days' });
+                   res.cookie('nToken', token, { maxAge: 900000, httpOnly: true });
+                   res.send(`${user.username} password updated`);
+                 })
+                 .catch((err) => {
+                   res.send(err.message);
+                 });
+        });
+  } else {
+    res.status(403).send('You have to login to the account you wish to modify.');
+  }
 };
 
 authController.logoutGet = (req, res) => {
