@@ -5,6 +5,8 @@ const Auth = require('./auth.model.js');
 const authController = {};
 
 authController.signUpGet = (req, res) => {
+  // console.log('res locals are: ');
+  // console.log(res.locals);
   const result = {
     message: '/api/auth/sign-up username password'
   };
@@ -62,7 +64,11 @@ authController.logoutGet = (req, res) => {
 };
 
 authController.rootGet = (req, res) => {
-  res.send('things work');
+  if (res.locals.currentUser) {
+    res.send(`You are logged in as ${res.locals.currentUser.username}`);
+  } else {
+    res.send('You are not logged in');
+  }
 };
 
 authController.rootDelete = (req, res) => {
