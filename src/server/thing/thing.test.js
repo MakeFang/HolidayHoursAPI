@@ -25,8 +25,8 @@ describe('## Thing APIs', () => {
         .get('/api/holiday-hours/')
         .end((err, res) => {
           if (err) done(err);
-          expect(res).to.have.status(200);
-          expect(res.text).to.equal('things work');
+          expect(res).to.have.status(401);
+          // expect(res.text).to.equal('things work');
           done();
         });
   });

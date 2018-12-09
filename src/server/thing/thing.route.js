@@ -6,14 +6,12 @@ const hoursController = require('./thing.controller.js');
 // #TODO: Implement thing.route.js.
 
 router.route('/')
-.all()
-.get(hoursController.rootget)
-.post();
+.get(hoursController.rootGet)
+.post(hoursController.rootPost);
 
 router.route('/:hoursId')
-.all()
-.get()
-.put()
-.delete();
+.get(hoursController.idGet)
+.put(hoursController.idPut)
+.delete(hoursController.idDelete);
 
 module.exports = router;

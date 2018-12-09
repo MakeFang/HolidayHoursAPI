@@ -61,7 +61,7 @@ authController.loginPut = (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
   if (!res.locals.currentUser) {
-    res.send('You must be logged in');
+    res.status(401).send('You must be logged in');
   }
   if (username === res.locals.currentUser.username) {
     Auth.findOne({ username })
@@ -90,9 +90,9 @@ authController.logoutGet = (req, res) => {
 
 authController.rootGet = (req, res) => {
   if (res.locals.currentUser) {
-    res.send(`You are logged in as ${res.locals.currentUser.username}`);
+    res.status(200).send(`You are logged in as ${res.locals.currentUser.username}`);
   } else {
-    res.send('You are not logged in');
+    res.status(401).send('You are not logged in');
   }
 };
 
