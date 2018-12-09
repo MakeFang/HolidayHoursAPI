@@ -15,7 +15,7 @@ authController.signUpPost = (req, res) => {
   const auth = new Auth(req.body);
   auth.save()
       .then((user) => {
-        const token = jwt.sign({ _id: user._id, username: user.username }, process.env.SECRET, { expiresIn: '60 days' });
+        const token = jwt.sign({ _id: user._id, username: user.username }, process.env.JWT_SECRET, { expiresIn: '60 days' });
         res.cookie('nToken', token, { maxAge: 900000, httpOnly: true });
         res.send(`${user.username} you are now signed up`);
       });
@@ -41,7 +41,7 @@ authController.loginPost = (req, res) => {
           if (!isMatch) {
             return res.status(401).json({ message: 'Wrong Username or Password' });
           }
-          const token = jwt.sign({ _id: user._id, username }, process.env.SECRET, { expiresIn: '60 days' });
+          const token = jwt.sign({ _id: user._id, username }, process.env.JWT_SECRET, { expiresIn: '60 days' });
           res.cookie('nToken', token, { maxAge: 900000, httpOnly: true });
           return res.send(`${user.username} you are now logged in.`);
         });
@@ -57,7 +57,8 @@ authController.loginPut = (req, res) => {
 };
 
 authController.logoutGet = (req, res) => {
-  res.send('things work');
+  res.clearCookie('nToken');
+  res.send('you are now logged out');
 };
 
 authController.rootGet = (req, res) => {
