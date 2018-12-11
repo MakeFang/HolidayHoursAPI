@@ -8,7 +8,7 @@ authController.signUpGet = (req, res) => {
   // console.log('res locals are: ');
   // console.log(res.locals);
   const result = {
-    message: '/api/auth/sign-up username password'
+    message: 'curl --cookie-jar cookies.txt -d "{"username":"username", "password":"password"}" -H "Content-Type: application/json" -X POST http://localhost:4040/api/auth/sign-up'
   };
   res.json(result);
 };
@@ -28,7 +28,7 @@ authController.signUpPost = (req, res) => {
 
 authController.loginGet = (req, res) => {
   const result = {
-    message: '/api/auth/login username password'
+    message: 'curl --cookie-jar cookies.txt -d "{"username":"username", "password":"password"}" -H "Content-Type: application/json" -X POST http://localhost:4040/api/auth/login'
   };
   res.json(result);
 };
@@ -97,7 +97,14 @@ authController.rootGet = (req, res) => {
 };
 
 authController.rootDelete = (req, res) => {
-  res.send('things work');
+  Auth.findByIdAndRemove(req.user._id)
+      .then((user) => {
+        res.clearCookie('nToken');
+        res.json(user);
+      })
+      .catch((err) => {
+        res.status(500).json({ status: 500, message: err.message });
+      });
 };
 
 module.exports = authController;
