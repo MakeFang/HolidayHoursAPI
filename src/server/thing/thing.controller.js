@@ -56,7 +56,7 @@ hoursController.idPut = (req, res) => {
         return res.status(403).json({ status: 403, message: 'You are unauthroized to modify this.' });
       })
       .then((hours) => {
-        res.json(hours);
+        res.status(200).json(hours);
       })
       .catch((err) => {
         res.status(500).json({ status: 500, message: err.message });

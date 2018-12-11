@@ -85,7 +85,3 @@ describe('Testing Unauthenticated Routes', () => {
          });
   });
 });
-
-describe('Testing Unauthorized Routes', () => {
-
-});
