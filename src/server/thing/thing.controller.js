@@ -5,60 +5,92 @@ const Hour = require('./thing.model.js');
 const hoursController = {};
 
 hoursController.rootGet = (req, res) => {
-  Hour.find({ name: req.user._id }, 'date open close')
+  Hour.find({ user: req.user._id }, 'date open close')
       .then((hour) => {
         if (hour.length === 0) {
-          res.send('no holiday hours information');
+          res.status(204).json({});
         } else {
-          res.send(hour);
+          res.json(hour);
         }
       })
+      // .catch(next);
       .catch((err) => {
-        res.send(err.message);
+        res.status(500).json({ status: 500, message: err.message });
       });
 };
 
 hoursController.rootPost = (req, res) => {
-  req.body.name = req.user._id;
+  req.body.user = req.user._id;
   const hour = new Hour(req.body);
   hour.save()
       .then((hours) => {
-        res.send(`${hours} is added`);
+        res.status(201).json(hours);
       })
       .catch((err) => {
-        res.send(err.message);
+        res.status(500).json({ status: 500, message: err.message });
       });
 };
 
 hoursController.idGet = (req, res) => {
   Hour.findOne({ _id: req.params.hoursId })
-      .populate('name', 'name username')
+      .populate('user', 'name username')
       .then((hour) => {
-        res.send(hour);
+        if (hour) {
+          res.json(hour);
+        } else {
+          res.status(204).json({});
+          // res.status(204).json({ message: 'no hours of that ID' });
+        }
       })
       .catch((err) => {
-        res.send(err.message);
+        res.status(500).json({ status: 500, message: err.message });
       });
 };
 
 hoursController.idPut = (req, res) => {
-  Hour.findByIdAndUpdate(req.params.hoursId, req.body)
+  Hour.findById(req.params.hoursId)
       .then((hour) => {
-        res.send(hour);
+        if (String(hour.user) === req.user._id) {
+          return Hour.findByIdAndUpdate(req.params.hoursId, req.body, { new: true });
+        }
+        return res.status(403).json({ status: 403, message: 'You are unauthroized to modify this.' });
+      })
+      .then((hours) => {
+        res.json(hours);
       })
       .catch((err) => {
-        res.send(err.message);
+        res.status(500).json({ status: 500, message: err.message });
       });
+  // Hour.findByIdAndUpdate(req.params.hoursId, req.body)
+  //     .then((hour) => {
+  //       res.send(hour);
+  //     })
+  //     .catch((err) => {
+  //       res.send(err.message);
+  //     });
 };
 
 hoursController.idDelete = (req, res) => {
-  Hour.findByIdAndRemove(req.params.hoursId)
+  Hour.findById(req.params.hoursId)
       .then((hour) => {
-        res.send(`${hour} deleted`);
+        if (String(hour.user) === req.user._id) {
+          return Hour.findByIdAndRemove(req.params.hoursId);
+        }
+        return res.status(403).json({ status: 403, message: 'You are unauthroized to delete this.' });
+      })
+      .then((hours) => {
+        res.json(hours);
       })
       .catch((err) => {
-        res.send(err.message);
+        res.status(500).json({ status: 500, message: err.message });
       });
+  // Hour.findByIdAndRemove(req.params.hoursId)
+  //     .then((hour) => {
+  //       res.send(`${hour} deleted`);
+  //     })
+  //     .catch((err) => {
+  //       res.send(err.message);
+  //     });
 };
 
 module.exports = hoursController;

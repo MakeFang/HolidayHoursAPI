@@ -35,6 +35,16 @@ describe('Testing Unauthenticated Routes', () => {
           done();
         });
   });
+  it('Should get json for sign-up', (done) => {
+    chai.request(app)
+        .get('/api/auth/sign-up')
+        .end((err, res) => {
+          if (err) done(err);
+          expect(res).to.have.status(200);
+          expect(res.body.message).to.equal('/api/auth/sign-up username password');
+          done();
+        });
+  });
 });
 
 describe('Testing Unauthorized Routes', () => {
