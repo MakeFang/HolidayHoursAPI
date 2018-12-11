@@ -61,13 +61,6 @@ hoursController.idPut = (req, res) => {
       .catch((err) => {
         res.status(500).json({ status: 500, message: err.message });
       });
-  // Hour.findByIdAndUpdate(req.params.hoursId, req.body)
-  //     .then((hour) => {
-  //       res.send(hour);
-  //     })
-  //     .catch((err) => {
-  //       res.send(err.message);
-  //     });
 };
 
 hoursController.idDelete = (req, res) => {
@@ -84,13 +77,6 @@ hoursController.idDelete = (req, res) => {
       .catch((err) => {
         res.status(500).json({ status: 500, message: err.message });
       });
-  // Hour.findByIdAndRemove(req.params.hoursId)
-  //     .then((hour) => {
-  //       res.send(`${hour} deleted`);
-  //     })
-  //     .catch((err) => {
-  //       res.send(err.message);
-  //     });
 };
 
 module.exports = hoursController;
