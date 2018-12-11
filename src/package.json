@@ -43,7 +43,7 @@
     "MVC"
   ],
   "dependencies": {
-    "bcrypt": "false3.0.2",
+    "bcryptjs": "false2.4.3",
     "body-parser": "1.18.2",
     "cookie-parser": "false1.4.3",
     "cors": "2.8.4",
