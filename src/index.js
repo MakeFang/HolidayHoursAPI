@@ -33,7 +33,7 @@ if (config.mongooseDebug) {
 if (!module.parent) {
   // listen on port config.port
   app.listen(process.env.PORT || config.port, () => {
-    console.info(`server started on port ${config.port} (${config.env})`); // eslint-disable-line no-console
+    console.info('server started on port'); // eslint-disable-line no-console
   });
 }
 
