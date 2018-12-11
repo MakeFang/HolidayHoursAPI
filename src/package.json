@@ -43,9 +43,9 @@
     "MVC"
   ],
   "dependencies": {
-    "bcryptjs": "false2.4.3",
+    "bcryptjs": "2.4.3",
     "body-parser": "1.18.2",
-    "cookie-parser": "false1.4.3",
+    "cookie-parser": "1.4.3",
     "cors": "2.8.4",
     "debug": "^2.4.5",
     "docsify-cli": "4.2.1",
@@ -57,7 +57,7 @@
     "jsonwebtoken": "7.1.9",
     "method-override": "^2.3.10",
     "mongoose": "4.7.4",
-    "underscore": "false1.9.1"
+    "underscore": "1.9.1"
   },
   "devDependencies": {
     "chai": "4.1.2",
