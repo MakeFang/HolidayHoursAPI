@@ -1,6 +1,6 @@
 # HOLIDAY HOURS API
 
-[Base request URL](https://enigmatic-garden-88813.herokuapp.com/api/)
+[Base API URL](https://enigmatic-garden-88813.herokuapp.com/api/)
 
 The purpose of this API is
 
