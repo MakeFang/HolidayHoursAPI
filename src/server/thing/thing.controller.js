@@ -33,7 +33,7 @@ hoursController.rootPost = (req, res) => {
 
 hoursController.idGet = (req, res) => {
   Hour.findOne({ _id: req.params.hoursId })
-      .populate('user', 'name username')
+      .populate('user', 'name')
       .then((hour) => {
         if (hour) {
           res.json(hour);
