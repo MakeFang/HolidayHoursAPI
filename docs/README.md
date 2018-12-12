@@ -26,7 +26,7 @@ The purpose of this API is
 | username      | String      |    |
 | password | String     |    |
 
-- Response:
+- Response: The username of the account.
 
 ### Request **POST** /auth/login
 
@@ -37,9 +37,11 @@ The purpose of this API is
 | username      | String      |    |
 | password | String     |    |
 
-- Response:
+- Response: The username of the account.
 
 ### Request **PUT** /auth/login
+
+**The user can only modify its own account.**
 
 - Body:
 
@@ -47,12 +49,14 @@ The purpose of this API is
 | :-------------: |:-------------:| -----|
 | password | String     |    |
 
-- Response:
+- Response: The username of the modified account.
 
 ### Request **DELETE** /auth/
 
+**The user can only delete its own account.**
+
 - Body: None
-- Response:
+- Response: The deleted user.
 
 ## Holiday Hours Routes
 
